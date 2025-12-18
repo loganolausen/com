@@ -44,40 +44,68 @@
       margin: 0 auto;
     }
 
-    /* ---------------- HERO ---------------- */
+   .hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+}
 
-    .hero {
-      min-height: 90vh;
-      display: flex;
-      align-items: center;
-    }
+.hero .container {
+  max-width: 980px;
+}
 
-    .hero h1 {
-      font-size: clamp(48px, 7vw, 92px);
-      font-weight: 800;
-      line-height: 0.95;
-      margin-bottom: 24px;
-    }
+.hero h1 {
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  margin-bottom: 32px;
+}
 
-    .hero p {
-      max-width: 520px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-    }
+.hero p {
+  max-width: 460px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 40px;
+}
 
-    .cta {
-      margin-top: 32px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #fff;
-      color: #000;
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 14px;
-    }
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #000;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.cta:hover {
+  background: #FFFB00;
+  color: #000;
+}
+
+/* ================ MOBILE HERO ================= */
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: auto;
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    line-height: 1.05;
+  }
+
+  .hero p {
+    max-width: 100%;
+  }
+}
 
     /* ---------------- WORK GRID ---------------- */
 
