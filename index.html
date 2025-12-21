@@ -47,13 +47,12 @@
    .hero {
   min-height: 92vh;
   display: flex;
-  align-items: center;
+  align-items: center; /* This keeps it vertically centered */
+  justify-content: flex-start; /* This aligns the container to the left */
 }
 
 .hero .container {
   max-width: 980px;
-  margin-left: 0; /* Ensures the container doesn't push away from the left edge */
-  margin-right: auto;
 }
 
 .hero h1 {
