@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maxxis Tyres — Logan Olausen Design</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #000;
+      --text: #fff;
+      --muted: #9a9a9a;
+      --yellow: #FFFB00;
+      --radius: 18px;
+      --max-width: 1200px;
+      --border: #676767;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    section { padding: 80px 50px; }
+    .container { max-width: var(--max-width); margin: 0 auto; }
+    /* Reduce gap AFTER About section only */
+    .section-tight-bottom-95 { padding-bottom: 95px; }
+
+    /* ---------------- MOBILE UX POLISH ---------------- */
+
+/* Better tap feel + remove iOS tap highlight */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Visible keyboard focus (accessibility + mobile keyboards) */
+a:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* Image safety */
+img {
+  height: auto;
+}
+
+
+/* ---------------- HEADER ---------------- */
+
+.site-header {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  padding: 0 50px;            /* <-- matches section side padding */
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  width: 60px;
+  height: auto;
+  pointer-events: auto;
+}
+
+
+    /* Shared section header row (like View Work/About/Experience) */
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .section-label {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      opacity: 0.9;
+    }
+    .section-down {
+      font-size: 25px;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    /* PROJECT HERO */
+    .project-hero {
+      padding-top: 200px; /* space for header */
+      padding-bottom: 40px;
+      text-align: center;
+    }
+    .project-hero h1 {
+      font-size: clamp(120px, 5vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+      margin: 0 0 10px 0;
+    }
+    .project-hero p {
+      max-width: 720px;
+      padding-top: 20px;
+      margin: 0 auto;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+
+    /* Hero image card */
+    .hero-media {
+      margin-top: 40px;
+    }
+    .hero-media .frame {
+      background: #111;
+      border-radius: 0; /* screenshot looks square */
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    }
+    .hero-media .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ABOUT + META GRID */
+    .project-about {
+      padding-top: 50px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-copy h2 {
+      font-size: 38px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .about-copy p {
+      line-height: 1.7;
+      font-weight: 300;
+      font-size: 18px;
+      opacity: 0.85;
+    }
+
+    
+    .meta-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 30px 0;
+      border-bottom: 1px solid #676767;
+    }
+    .meta-row .k {
+      font-size: 16px;
+      font-weight: 300;
+      opacity: 0.7;
+      min-width: 80px;
+    }
+    .meta-row .v {
+      font-size: 27px;
+      font-weight: 500;
+      text-align: right;
+      opacity: 0.95;
+    }
+
+    /* Live Site row: dash + arrow aligned right */
+.v-live{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.v-live .work-arrow {
+  transition: transform 0.2s ease;
+}
+
+.v-live .work-arrow:hover {
+  transform: translateX(2px);
+}
+
+/* Yellow circle arrow button (same as homepage) */
+.work-arrow{
+  width: 45px;
+  height: 45px;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+
+
+.live-link{ font-size: 32px; font-weight: 500; opacity: 0.95; }
+
+
+    /* IMAGE GRIDS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 54px;
+    }
+    .media-frame {
+      background: #111;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Reduce space BELOW image 03 only */
+.section-tight-bottom {
+  padding-bottom: 54px;
+}
+
+/* Remove top padding from the next section so the gap is controlled by the previous one */
+.section-no-top {
+  padding-top: 0;
+}
+
+    /* QUOTE */
+    .quote {
+      text-align: center;
+      padding-top: 70px;
+      padding-bottom: 70px;
+    }
+    .quote blockquote {
+      margin: 0 auto 16px auto;
+      max-width: 700px;
+      font-size: 40px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .quote cite {
+      display: block;
+      font-size: 20px;
+      font-weight: 300;
+      opacity: 0.6;
+      font-style: normal;
+    }
+
+    /* BACK HOME BUTTON (small, centered) */
+    .back-home {
+      display: flex;
+      justify-content: center;
+      padding-top: 80px;
+      padding-bottom: 10px;
+    }
+    .back-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  /* Match homepage CTA sizing */
+  padding: 26px;
+  font-size: 20px;
+  font-weight: 500;
+
+  border-radius: 999px;
+  border: 1px solid #696969;
+  background: transparent;
+  opacity: 0.9;
+
+  transition: border-color 0.25s ease;
+}
+
+.back-pill:hover {
+  border-color: var(--yellow);
+}
+
+
+    /* FINAL CTA (reuse your homepage feel) */
+    .final-cta {
+      text-align: center;
+      padding-top: 0px;
+    }
+    .final-cta h2 {
+      font-size: clamp(36px, 6vw, 64px);
+      letter-spacing: -0.05em;
+      margin-bottom: 24px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-block {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: #000;
+      padding: 26px;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 20px;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .cta:hover { background: var(--yellow); color: #000; }
+
+    .cta-sub {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 300;
+      opacity: 0.95;
+    }
+    .cta-arrow { color: var(--yellow); font-size: 20px; font-weight: 400; position: relative; top: -1px; }
+
+    footer {
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+      .grid-2 { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 56px 18px; }
+
+      .site-header { top: 10px; padding: 0 18px; }
+      .header-inner { height: 56px; }
+      .site-logo { width: 44px; }
+      .resume-link { font-size: 16px; }
+
+      .project-hero { padding-top: 110px; }
+      .project-hero p { font-size: 16px; padding: 0 6px; }
+
+      .hero-media .frame { aspect-ratio: 4 / 3; }
+
+      .about-copy h2 { font-size: 24px; }
+      .meta-row .v { font-size: 22px; }
+
+      .yellow-dot { width: 34px; height: 34px; }
+
+      .cta { padding: 16px 18px; font-size: 16px; }
+      .cta-sub { margin-top: 10px; font-size: 15px; }
+      .cta-arrow { font-size: 16px; top: 0; }
+    }
+    /* Extra safety for very small phones */
+@media (max-width: 420px) {
+  .project-hero h1 {
+    font-size: 56px;
+    line-height: 0.92;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" aria-label="Back to homepage">
+        <img src="images/logo.avif" alt="Logan Olausen Design Logo" class="site-logo">
+      </a>
+  </header>
+
+  <!-- PROJECT HERO -->
+  <section class="project-hero">
+    <div class="container">
+      <h1>Maxxis Tyres</h1>
+      <p>Adapting a global tyre giant to appeal to the Kiwi lifestyle.</p>
+
+      <div class="hero-media">
+        <div class="frame">
+          <!-- Swap this image per project -->
+          <img src="images/hero-maxxis-tyres.jpg" alt="Maxxis Tyres hero image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PROJECT -->
+  <section class="project-about section-tight-bottom-95">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">About Project</span>
+        <span class="section-down" aria-hidden="true">↓</span>
+      </div>
+
+      <div class="about-grid">
+        <!-- Left: copy -->
+        <div class="about-copy">
+          <h2>New Zealand has a unique culture and lifestyle that revolves around going places. 
+            And Maxxis Tyres happens to play a part in that through its globally renowned tyres.</h2>
+          <p>
+            Over the past few years, I have been involved with ongoing design work, 
+            overseeing and adapting the Maxxis brand to appeal to the Kiwi market. 
+            This has included a wide variety of both print and digital applications, 
+            including billboards, brochures, apparel, vehicle wraps and more.
+          </p>
+        </div>
+
+        <!-- Right: meta -->
+        <div>
+          <div class="meta">
+            <div class="meta-row">
+              <div class="k">Client</div>
+              <div class="v">Tyremax</div>
+            </div>
+            <div class="meta-row">
+              <div class="k">Role</div>
+              <div class="v">Designer</div>
+            </div>
+            <div class="meta-row">
+              <div class="k">Services</div>
+              <div class="v">Print & Digital Design</div>
+            </div>
+            <div class="meta-row meta-row--live">
+  <div class="k">Live Site</div>
+  <div class="v v-live">
+    <a
+      href="https://www.maxxistyres.co.nz/"
+      target="_blank"
+      rel="noopener"
+      class="work-arrow"
+      aria-label="Visit live site"
+    >
+      →
+    </a>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMAGE GRID 1 -->
+  <section class="section-no-top">
+    <div class="container">
+      <div class="grid-2">
+        <div class="media-frame">
+          <img src="images/projects/maxxis-tyres/01.jpg" alt="Project image 01">
+        </div>
+        <div class="media-frame">
+          <img src="images/projects/maxxis-tyres/02.jpg" alt="Project image 02">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+
+  
+
+  <!-- FEATURE IMAGE (full width) -->
+ <section class="section-tight-bottom">
+  <div class="container">
+    <div class="media-frame" style="aspect-ratio: 16 / 9;">
+      <img src="images/projects/maxxis-tyres/03.jpg" alt="Feature image">
+    </div>
+  </div>
+</section>
+
+  <!-- IMAGE GRID 2 -->
+<section class="section-no-top">
+    <div class="container">
+      <div class="grid-2">
+        <div class="media-frame">
+          <img src="images/projects/maxxis-tyres/04.jpg" alt="Project image 04">
+        </div>
+        <div class="media-frame">
+          <img src="images/projects/maxxis-tyres/05.jpg" alt="Project image 05">
+        </div>
+      </div>
+
+      <div class="back-home">
+        <a class="back-pill" href="index.html">Take me back home</a>
+      </div>
+
+      <div style="border-top: 1px solid var(--border); margin-top: 30px;"></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Let's collaborate and bring your vision to life!</h2>
+      <div class="cta-block">
+        <a class="cta" href="mailto:hello@loganolausen.com">hello@loganolausen.com</a>
+        <div class="cta-sub">
+          <span>Get in touch</span>
+          <span class="cta-arrow">↑</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2025 Logan Olausen Design
+    </div>
+  </footer>
+</body>
+</html>
+
