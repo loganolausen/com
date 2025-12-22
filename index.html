@@ -14,7 +14,7 @@
       --bg: #000;
       --text: #fff;
       --muted: #9a9a9a;
-      --yellow: #ffd400;
+      --yellow: #FFFB00;
       --radius: 18px;
       --max-width: 1200px;
     }
@@ -35,8 +35,11 @@
       text-decoration: none;
     }
 
+   .accent { color: var(--yellow); }
+
+
     section {
-      padding: 80px 24px;
+      padding: 80px 50px;
     }
 
     .container {
@@ -44,30 +47,64 @@
       margin: 0 auto;
     }
 
-   .hero {
+  .hero {
   min-height: 92vh;
   display: flex;
-  align-items: center; 
+  align-items: center;      /* Keeps content vertically centered */
+  justify-content: center;   /* Keeps the container centered on the page */
 }
 
 .hero .container {
-  max-width: 980px;
+  width: 100%;               /* Ensures it takes up available space up to max-width */
+  max-width: 1200px;         /* Match this to your global --max-width or 980px */
+  margin: 0 auto;
+  text-align: left;          /* Forces all text/buttons to the left of the container */
 }
 
 .hero h1 {
   font-size: clamp(52px, 7vw, 96px);
   font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 0.98;
+  letter-spacing: -0.08em;
+  line-height: 0.85;
   margin-bottom: 32px;
+  align-items: center; 
 }
 
 .hero p {
-  max-width: 460px;
-  color: #fff;
-  font-size: 14px;
+  max-width: 600px;
+  opacity: 0.95;
+  font-size: 18px;
+  font-weight: 300;
   line-height: 1.65;
   margin-bottom: 40px;
+}
+
+/* ---------------- CTA BLOCK ---------------- */
+
+.cta-block {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+   /* ---------------- CTA SUBTEXT ---------------- */
+
+.cta-sub {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 300;
+  opacity: 0.95;
+}
+
+.cta-arrow {
+  color: var(--yellow);
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  top: -1px; /* tiny optical alignment */
 }
 
 .cta {
@@ -76,10 +113,10 @@
   gap: 10px;
   background: #fff;
   color: #000;
-  padding: 10px 16px;
+  padding: 26px;
   border-radius: 999px;
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 20px;
   transition: background 0.25s ease, color 0.25s ease;
 }
 
@@ -87,6 +124,33 @@
   background: #FFFB00;
   color: #000;
 }
+
+/* ---------------- HEADER ---------------- */
+
+.site-header {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  padding: 0 50px;            /* <-- matches section side padding */
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  width: 60px;
+  height: auto;
+  pointer-events: auto;
+}
+
+
 
 /* ================ MOBILE HERO ================= */
 
@@ -107,51 +171,122 @@
   }
 }
 
-    /* ---------------- WORK GRID ---------------- */
+   /* ---------------- WORK (Framer-like) ---------------- */
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
+.work {
+  padding-top: 24px;
+}
 
-    .card {
-      background: #111;
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
+.work-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
 
-    .card:hover {
-      transform: translateY(-6px);
-    }
+.work-down {
+  font-size: 25px;
+  font-weight: 300;
+  opacity: 0.9;
+}
 
-    .card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+.work-label {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #fff;
+  opacity: 0.9;
+}
 
-    .card-footer {
-      padding: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-    }
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 54px;
+}
 
-    .arrow {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--yellow);
-      color: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-    }
+@media (max-width: 900px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card */
+.work-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Thumbnail area (this is what your current version is missing) */
+.work-thumb {
+  overflow: hidden;
+  background: #111;              /* shows even if an image fails to load */
+  aspect-ratio: 4 / 3;           /* gives the tile height like Framer */
+}
+
+.work-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Footer row under image */
+.work-footer {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.work-title {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.work-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.work-link {
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.work-arrow {
+  width: 45px;
+  height: 45px;
+  border-radius: 999px;
+  background: #FFFB00;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.work-card:hover .work-arrow {
+  transform: translateX(2px);
+}
+
+/* Optional: make the last item sit like your screenshot (single on left) */
+.work-card--single {
+  grid-column: 1 / span 1;
+}
+@media (max-width: 900px) {
+  .work-card--single {
+    grid-column: auto;
+  }
+}
+
+
 
     /* ---------------- ABOUT ---------------- */
 
@@ -168,29 +303,71 @@
     }
 
     .about h2 {
-      font-size: 32px;
+      font-size: 38px;
+      font-weight: 500;
       margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
 
     .about p {
-      color: var(--muted);
       line-height: 1.7;
-      font-size: 15px;
+      font-weight: 300;
+      font-size: 18px;
+      opacity: 0.95;
     }
 
-    /* ---------------- EXPERIENCE ---------------- */
+ /* ---------------- EXPERIENCE (Framer-like) ---------------- */
 
-    .experience-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 20px 0;
-      border-bottom: 1px solid #222;
-      font-size: 14px;
-    }
+.experience-head {
+  /* reuse work-head styling visually, but we’ll keep a separate class if you want later */
+  margin-bottom: 18px;
+}
 
-    .experience-item span {
-      color: var(--muted);
-    }
+.experience-list {
+  border-top: 1px solid #222;
+}
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  padding: 26px 0;
+  border-bottom: 1px solid #676767;
+}
+
+.experience-left strong {
+  display: block;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.experience-left .role {
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  opacity: 0.85;
+}
+
+.experience-right {
+  font-size: 16px;
+  font-weight: 300;
+  opacity: 0.85;
+  white-space: nowrap;
+  align-self: center;
+}
+
+@media (max-width: 700px) {
+  .experience-item {
+    grid-template-columns: 1fr;
+  }
+  .experience-right {
+    align-self: start;
+  }
+}
+
 
     /* ---------------- CTA ---------------- */
 
@@ -200,8 +377,13 @@
 
     .final-cta h2 {
       font-size: clamp(36px, 6vw, 64px);
+      letter-spacing: -0.05em;
       margin-bottom: 24px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
+    
 
     /* ---------------- FOOTER ---------------- */
 
@@ -216,119 +398,395 @@
         grid-template-columns: 1fr;
       }
     }
+
+/* ---------------- MOBILE POLISH ---------------- */
+
+/* Slightly tighter base padding on small screens */
+@media (max-width: 600px) {
+  section {
+    padding: 56px 18px;
+  }
+
+  .site-header {
+  top: 10px;
+  padding: 0 18px;            /* <-- matches mobile section padding */
+}
+
+.header-inner {
+  height: 56px;
+}
+
+
+  .site-logo {
+    width: 44px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: auto;
+    padding-top: 110px;
+    padding-bottom: 56px;
+  }
+
+  .hero h1 {
+    font-size: 56px;          /* big but not ridiculous */
+    line-height: 0.92;
+    letter-spacing: -0.06em;  /* slightly less tight for small screens */
+    margin-bottom: 18px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+
+/* Center the entire CTA block within the hero on mobile */
+.hero .cta-block {
+  display: flex;            /* override inline-flex */
+  width: 100%;
+  align-items: center;
+  padding-top: 30px;
+}
+
+
+  /* CTA button + subtext */
+  .cta {
+    padding: 16px 18px;
+    font-size: 16px;
+  }
+
+  .cta-sub {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .cta-arrow {
+    font-size: 16px;
+    top: 0;
+  }
+
+  /* Section headers (View Work / About Me / Experience) */
+  .work-label {
+    font-size: 16px;
+  }
+
+  .work-down {
+    font-size: 18px;
+  }
+
+  /* WORK GRID */
+  .work {
+    padding-top: 10px;
+  }
+
+  .work-grid {
+    gap: 28px;
+  }
+
+  .work-footer {
+    margin-top: 18px;
+  }
+
+  .work-title {
+    font-size: 20px;
+  }
+
+  .work-link {
+    font-size: 14px;
+  }
+
+  .work-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  /* ABOUT */
+  .about {
+    gap: 22px;
+  }
+
+  .about h2 {
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+
+  .about p {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* EXPERIENCE */
+  .experience-left strong {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .experience-left .role,
+  .experience-right {
+    font-size: 14px;
+  }
+
+  .experience-item {
+    padding: 18px 0;
+    border-bottom: 1px solid #222; /* your current border is white; this is nicer on mobile */
+  }
+
+  /* FINAL CTA */
+  .final-cta h2 {
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin-bottom: 18px;
+  }
+}
+
+/* Tablet polish (keeps things from feeling too large on iPad widths) */
+@media (min-width: 601px) and (max-width: 900px) {
+  section {
+    padding: 72px 50px;
+  }
+
+  .hero h1 {
+    line-height: 0.9;
+    letter-spacing: -0.07em;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .cta {
+    padding: 18px 20px;
+    font-size: 18px;
+  }
+
+  .work-title {
+    font-size: 24px;
+  }
+
+  .about h2 {
+    font-size: 32px;
+  }
+}
+    
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <img src="images/logo.avif" alt="Logan Olausen Design Logo" class="site-logo">
+  </div>
+</header>
+
+
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
-      <h1>
-  Logan<br>
-  Olausen<br>
-  Design
-</h1>
-      <p>
-        I'm Logan, a multidisciplinary graphic designer working remotely in New Zealand.
-        With over a decade of global experience, I specialise in creating captivating brands
-        and visual identities.
-      </p>
+  <div class="container">
+    <h1>
+      Logan<br>
+      Olausen<br>
+      Design
+    </h1>
+
+    <p>
+      Welcome! I'm Logan, a multidisciplinary graphic designer based down under in New Zealand. Proficient in both print and digital design with a focus in branding and visual identity. I create simple, memorable brands that deliver a clear and consistent visual style.
+    </p>
+
+    <div class="cta-block">
       <a class="cta" href="mailto:hello@loganolausen.com">
         hello@loganolausen.com
       </a>
+      <div class="cta-sub">
+        <span>Get in touch</span>
+        <span class="cta-arrow">↑</span>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- WORK -->
-  <section>
-    <div class="container grid">
-      <div class="card">
-        <img src="images/hero-cheeky-goat.jpg" alt="">
-        <div class="card-footer">
-          <span>Cheeky Goat</span>
-          <div class="arrow">→</div>
-        </div>
-      </div>
+<section class="work" id="work">
+  <div class="container">
+    <div class="work-head">
+  <span class="work-label">View Work</span>
+  <span class="work-down" aria-hidden="true">↓</span>
+</div>
 
-      <div class="card">
-        <img src="images/hero-indian.jpg" alt="">
-        <div class="card-footer">
-          <span>Burt Munro Art Print</span>
-          <div class="arrow">→</div>
-        </div>
-      </div>
 
-      <div class="card">
-        <img src="images/reelmedia.jpg" alt="">
-        <div class="card-footer">
-          <span>Reelmedia Film</span>
-          <div class="arrow">→</div>
+    <div class="work-grid">
+      <!-- 1 -->
+      <a class="work-card" href="cheeky-goat.html">
+        <div class="work-thumb">
+          <img src="images/hero-cheeky-goat.jpg" alt="Cheeky Goat" loading="lazy" />
         </div>
-      </div>
+        <div class="work-footer">
+          <div class="work-title">Cheeky Goat</div>
+          <div class="work-action">
+            <span class="work-link">View Project</span>
+            <span class="work-arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </a>
 
-      <div class="card">
-        <img src="images/maxxis.jpg" alt="">
-        <div class="card-footer">
-          <span>Maxxis Tyres</span>
-          <div class="arrow">→</div>
+      <!-- 2 -->
+      <a class="work-card" href="burt-munro.html">
+        <div class="work-thumb">
+          <img src="images/hero-burt-munro.jpg" alt="Burt Munro Art Print" loading="lazy" />
         </div>
-      </div>
+        <div class="work-footer">
+          <div class="work-title">Burt Munro Art Print</div>
+          <div class="work-action">
+            <span class="work-link">View Project</span>
+            <span class="work-arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </a>
 
-      <div class="card">
-        <img src="images/ribclub.jpg" alt="">
-        <div class="card-footer">
-          <span>RIB Club</span>
-          <div class="arrow">→</div>
+      <!-- 3 -->
+      <a class="work-card" href="reel-media.html">
+        <div class="work-thumb">
+          <img src="images/reelmedia.jpg" alt="Reelmedia Film" loading="lazy" />
         </div>
-      </div>
+        <div class="work-footer">
+          <div class="work-title">Reelmedia Film</div>
+          <div class="work-action">
+            <span class="work-link">View Project</span>
+            <span class="work-arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 4 -->
+      <a class="work-card" href="maxxis-tyres.html">
+        <div class="work-thumb">
+          <img src="images/maxxis.jpg" alt="Maxxis Tyres" loading="lazy" />
+        </div>
+        <div class="work-footer">
+          <div class="work-title">Maxxis Tyres</div>
+          <div class="work-action">
+            <span class="work-link">View Project</span>
+            <span class="work-arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 5 -->
+      <a class="work-card work-card--single" href="rib-club.html">
+        <div class="work-thumb">
+          <img src="images/ribclub.jpg" alt="RIB Club" loading="lazy" />
+        </div>
+        <div class="work-footer">
+          <div class="work-title">RIB Club</div>
+          <div class="work-action">
+            <span class="work-link">View Project</span>
+            <span class="work-arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- ABOUT -->
-  <section>
-    <div class="container about">
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="work-head">
+      <span class="work-label">About Me</span>
+      <span class="work-down" aria-hidden="true">↓</span>
+    </div>
+
+    <div class="about">
       <img src="images/profile.jpg" alt="">
       <div>
-        <h2>Hey! I'm Logan.</h2>
+        <h2><span class="accent">Hey</span>! I'm Logan Olausen, a multidisciplinary designer working as a remote freelancer.</h2>
         <p>
-          I'm currently based down in New Zealand, having been in the graphic design industry
-          for over 10 years across NZ and abroad. I’ve collaborated with clients and agencies
-          across the globe, including UNESCO, Air New Zealand, and Maxxis Tyres.
+          Currently based down under in New Zealand, I have been in the graphic design 
+          industry for over 10 years in both NZ and abroad. I have collaborated with 
+          clients and agencies across the globe, which has given me the opportunity to 
+          work with some of the world’s leading brands, including UNESCO, Air New Zealand 
+          and Maxxis Tyres to name a few.
+        </p>
+        <p>
+          My multidisciplinary skillset spans across an 
+          array of print and digital applications with a particular focus in branding and 
+          visual identity. I love building brands from the ground up and being involved in 
+          the creative process every step along the way.
         </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- EXPERIENCE -->
-  <section>
-    <div class="container">
+
+<!-- EXPERIENCE -->
+<section class="experience-section" id="experience">
+  <div class="container">
+    <div class="work-head experience-head">
+      <span class="work-label">Experience</span>
+      <span class="work-down" aria-hidden="true">↓</span>
+    </div>
+
+    <div class="experience-list">
       <div class="experience-item">
-        <strong>Logan Olausen Design</strong>
-        <span>2018 — Present</span>
+        <div class="experience-left">
+          <strong>Logan Olausen Design</strong>
+          <span class="role">Freelance Designer</span>
+        </div>
+        <div class="experience-right">2018 — Present</div>
       </div>
+
       <div class="experience-item">
-        <strong>The Progress Film Company</strong>
-        <span>2017</span>
+        <div class="experience-left">
+          <strong>The Progress Film Company</strong>
+          <span class="role">Lead Designer</span>
+        </div>
+        <div class="experience-right">2017</div>
       </div>
+
       <div class="experience-item">
-        <strong>Emotive Design</strong>
-        <span>2014 — 2015</span>
+        <div class="experience-left">
+          <strong>Emotive Design</strong>
+          <span class="role">Lead Designer</span>
+        </div>
+        <div class="experience-right">2014 — 2015</div>
       </div>
+
       <div class="experience-item">
-        <strong>Fly Creative</strong>
-        <span>2010 — 2012</span>
+        <div class="experience-left">
+          <strong>Fly Creative</strong>
+          <span class="role">Graphic Designer / Production Manager</span>
+        </div>
+        <div class="experience-right">2010 — 2012</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- FINAL CTA -->
   <section class="final-cta">
     <div class="container">
       <h2>Let's collaborate and bring your vision to life!</h2>
-      <a class="cta" href="mailto:hello@loganolausen.com">
-        Get in touch
-      </a>
+<div class="cta-block">
+  <a class="cta" href="mailto:hello@loganolausen.com">
+    hello@loganolausen.com
+  </a>
+  <div class="cta-sub">
+    <span>Get in touch</span>
+    <span class="cta-arrow">↑</span>
+  </div>
+</div>
+
     </div>
   </section>
 
