@@ -26,6 +26,8 @@
     img { max-width: 100%; display: block; }
     section { padding: 80px 50px; }
     .container { max-width: var(--max-width); margin: 0 auto; }
+    /* Reduce gap AFTER About section only */
+    .section-tight-bottom-95 { padding-bottom: 95px; }
 
     /* ---------------- MOBILE UX POLISH ---------------- */
 
@@ -408,7 +410,7 @@ img {
   </section>
 
   <!-- ABOUT PROJECT -->
-  <section class="project-about">
+  <section class="project-about section-tight-bottom-95">
     <div class="container">
       <div class="section-head">
         <span class="section-label">About Project</span>
@@ -465,7 +467,7 @@ img {
   </section>
 
   <!-- IMAGE GRID 1 -->
-  <section>
+  <section class="section-no-top">
     <div class="container">
       <div class="grid-2">
         <div class="media-frame">
