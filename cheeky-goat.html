@@ -17,7 +17,7 @@
       --yellow: #FFFB00;
       --radius: 18px;
       --max-width: 1200px;
-      --border: #222;
+      --border: #676767;
     }
 
     * { box-sizing: border-box; }
@@ -26,6 +26,27 @@
     img { max-width: 100%; display: block; }
     section { padding: 80px 24px; }
     .container { max-width: var(--max-width); margin: 0 auto; }
+
+    /* ---------------- MOBILE UX POLISH ---------------- */
+
+/* Better tap feel + remove iOS tap highlight */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Visible keyboard focus (accessibility + mobile keyboards) */
+a:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* Image safety */
+img {
+  height: auto;
+}
+
 
     /* HEADER (same feel as homepage) */
     .site-header {
@@ -80,21 +101,22 @@
 
     /* PROJECT HERO */
     .project-hero {
-      padding-top: 140px; /* space for header */
+      padding-top: 200px; /* space for header */
       padding-bottom: 40px;
       text-align: center;
     }
     .project-hero h1 {
-      font-size: clamp(40px, 5vw, 64px);
-      font-weight: 600;
+      font-size: clamp(120px, 5vw, 64px);
+      font-weight: 700;
       letter-spacing: -0.06em;
       line-height: 0.95;
       margin: 0 0 10px 0;
     }
     .project-hero p {
       max-width: 720px;
+      padding-top: 20px;
       margin: 0 auto;
-      font-size: 14px;
+      font-size: 20px;
       font-weight: 300;
       line-height: 1.7;
       opacity: 0.85;
@@ -129,60 +151,72 @@
     }
 
     .about-copy h2 {
-      font-size: 30px;
+      font-size: 40px;
       font-weight: 500;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-      margin: 0 0 18px 0;
+      margin-bottom: 16px;
     }
     .about-copy p {
-      font-size: 13px;
+      line-height: 1.7;
       font-weight: 300;
-      line-height: 1.9;
-      opacity: 0.85;
-      margin: 0 0 16px 0;
+      font-size: 20px;
     }
 
-    .meta {
-      border-top: 1px solid var(--border);
-    }
+    
     .meta-row {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 24px;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
+      padding: 30px 0;
+      border-bottom: 1px solid #676767;
     }
     .meta-row .k {
-      font-size: 12px;
+      font-size: 16px;
       font-weight: 300;
       opacity: 0.7;
       min-width: 80px;
     }
     .meta-row .v {
-      font-size: 14px;
+      font-size: 32px;
       font-weight: 500;
       text-align: right;
       opacity: 0.95;
     }
 
-    /* small yellow circle arrow (matches your work-arrow style) */
-    .meta-cta {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 18px;
-    }
-    .yellow-dot {
-      width: 45px; height: 45px;
-      border-radius: 999px;
-      background: var(--yellow);
-      color: #000;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 400;
-    }
+    /* Live Site row: dash + arrow aligned right */
+.v-live{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.v-live .work-arrow {
+  transition: transform 0.2s ease;
+}
+
+.v-live .work-arrow:hover {
+  transform: translateX(2px);
+}
+
+/* Yellow circle arrow button (same as homepage) */
+.work-arrow{
+  width: 45px;
+  height: 45px;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+
+
+.live-link{ font-size: 32px; font-weight: 500; opacity: 0.95; }
+
 
     /* IMAGE GRIDS */
     .grid-2 {
@@ -201,6 +235,16 @@
       object-fit: cover;
     }
 
+    /* Reduce space BELOW image 03 only */
+.section-tight-bottom {
+  padding-bottom: 54px;
+}
+
+/* Remove top padding from the next section so the gap is controlled by the previous one */
+.section-no-top {
+  padding-top: 0;
+}
+
     /* QUOTE */
     .quote {
       text-align: center;
@@ -209,15 +253,15 @@
     }
     .quote blockquote {
       margin: 0 auto 16px auto;
-      max-width: 900px;
-      font-size: clamp(20px, 2.4vw, 34px);
-      font-weight: 600;
-      letter-spacing: -0.04em;
+      max-width: 700px;
+      font-size: 40px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
       line-height: 1.1;
     }
     .quote cite {
       display: block;
-      font-size: 12px;
+      font-size: 20px;
       font-weight: 300;
       opacity: 0.6;
       font-style: normal;
@@ -227,26 +271,36 @@
     .back-home {
       display: flex;
       justify-content: center;
-      padding-top: 40px;
+      padding-top: 80px;
       padding-bottom: 10px;
     }
     .back-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      border: 1px solid #333;
-      font-size: 12px;
-      font-weight: 500;
-      opacity: 0.9;
-    }
-    .back-pill:hover { border-color: var(--yellow); }
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  /* Match homepage CTA sizing */
+  padding: 26px;
+  font-size: 20px;
+  font-weight: 500;
+
+  border-radius: 999px;
+  border: 1px solid #696969;
+  background: transparent;
+  opacity: 0.9;
+
+  transition: border-color 0.25s ease;
+}
+
+.back-pill:hover {
+  border-color: var(--yellow);
+}
+
 
     /* FINAL CTA (reuse your homepage feel) */
     .final-cta {
       text-align: center;
-      padding-top: 90px;
+      padding-top: 0px;
     }
     .final-cta h2 {
       font-size: clamp(36px, 6vw, 64px);
@@ -308,12 +362,12 @@
       .resume-link { font-size: 16px; }
 
       .project-hero { padding-top: 110px; }
-      .project-hero p { font-size: 13px; padding: 0 6px; }
+      .project-hero p { font-size: 16px; padding: 0 6px; }
 
       .hero-media .frame { aspect-ratio: 4 / 3; }
 
       .about-copy h2 { font-size: 24px; }
-      .meta-row .v { font-size: 13px; }
+      .meta-row .v { font-size: 22px; }
 
       .yellow-dot { width: 34px; height: 34px; }
 
@@ -321,6 +375,14 @@
       .cta-sub { margin-top: 10px; font-size: 15px; }
       .cta-arrow { font-size: 16px; top: 0; }
     }
+    /* Extra safety for very small phones */
+@media (max-width: 420px) {
+  .project-hero h1 {
+    font-size: 56px;
+    line-height: 0.92;
+  }
+}
+
   </style>
 </head>
 
@@ -331,13 +393,6 @@
       <a href="index.html" aria-label="Back to homepage">
         <img src="images/logo.avif" alt="Logan Olausen Design Logo" class="site-logo">
       </a>
-
-      <!-- Optional: match screenshot top-right -->
-      <a class="resume-link" href="resume.pdf" target="_blank" rel="noopener">
-        <span class="resume-icon" aria-hidden="true">⤓</span>
-        <span>Resume</span>
-      </a>
-    </div>
   </header>
 
   <!-- PROJECT HERO -->
@@ -349,7 +404,7 @@
       <div class="hero-media">
         <div class="frame">
           <!-- Swap this image per project -->
-          <img src="images/projects/cheeky-goat/hero.jpg" alt="Cheeky Goat hero image">
+          <img src="images/hero-cheeky-goat.jpg" alt="Cheeky Goat hero image">
         </div>
       </div>
     </div>
@@ -366,13 +421,12 @@
       <div class="about-grid">
         <!-- Left: copy -->
         <div class="about-copy">
-          <h2>Calling for an upbeat, fun and memorable identity to emphasise the brand name and draw attention to the Cheeky Goat food cart.</h2>
+          <h2>Calling for an upbeat, fun and memorable identity to emphasis the brand name and draw attention to the Cheeky Goat food cart.</h2>
           <p>
-            Explain the friendly and approachable vibe, the cheeky expression, the concept behind the name, and the playful nature of the logo.
-            Mention any hand-drawn typeface / illustration style choices.
+            Exuding a friendly and approachable vibe with a cheeky expression, the logo centres around a boldly illustrated goat face, duly reflecting the brand name. The playful nature of the logo is further enhanced by a hand-drawn typeface that not only supports the illustration style, it compliments the handmade passion that goes into Cheeky Goat's food.
           </p>
           <p>
-            Add your second paragraph here. Keep it short and readable.
+            Yellow has been selected as the core brand colour, encapsulating the warm, welcoming spirit of the business. Yellow is also the first colour the human eye sees, ensuring that the Cheeky Goat food cart catches the eyes of passersby.
           </p>
         </div>
 
@@ -391,14 +445,22 @@
               <div class="k">Services</div>
               <div class="v">Visual Identity</div>
             </div>
-            <div class="meta-row">
-              <div class="k">Live Site</div>
-              <div class="v">—</div>
-            </div>
-          </div>
+            <div class="meta-row meta-row--live">
+  <div class="k">Live Site</div>
+  <div class="v v-live">
+    <a
+      href="https://example.com"
+      target="_blank"
+      rel="noopener"
+      class="work-arrow"
+      aria-label="Visit live site"
+    >
+      →
+    </a>
+  </div>
+</div>
 
-          <div class="meta-cta">
-            <span class="yellow-dot" aria-hidden="true">→</span>
+
           </div>
         </div>
       </div>
@@ -430,16 +492,16 @@
   </section>
 
   <!-- FEATURE IMAGE (full width) -->
-  <section>
-    <div class="container">
-      <div class="media-frame" style="aspect-ratio: 16 / 9;">
-        <img src="images/projects/cheeky-goat/03.jpg" alt="Feature image">
-      </div>
+ <section class="section-tight-bottom">
+  <div class="container">
+    <div class="media-frame" style="aspect-ratio: 16 / 9;">
+      <img src="images/projects/cheeky-goat/03.jpg" alt="Feature image">
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- IMAGE GRID 2 -->
-  <section>
+<section class="section-no-top">
     <div class="container">
       <div class="grid-2">
         <div class="media-frame">
