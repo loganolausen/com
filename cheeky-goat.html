@@ -1,1 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cheeky Goat — Logan Olausen Design</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #000;
+      --text: #fff;
+      --muted: #9a9a9a;
+      --yellow: #FFFB00;
+      --radius: 18px;
+      --max-width: 1200px;
+      --border: #222;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    section { padding: 80px 24px; }
+    .container { max-width: var(--max-width); margin: 0 auto; }
+
+    /* HEADER (same feel as homepage) */
+    .site-header {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+    .site-logo { width: 60px; height: auto; pointer-events: auto; }
+
+    .resume-link {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    .resume-icon {
+      width: 22px; height: 22px;
+      display: inline-flex; align-items: center; justify-content: center;
+      opacity: 0.9;
+    }
+
+    /* Shared section header row (like View Work/About/Experience) */
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .section-label {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      opacity: 0.9;
+    }
+    .section-down {
+      font-size: 25px;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    /* PROJECT HERO */
+    .project-hero {
+      padding-top: 140px; /* space for header */
+      padding-bottom: 40px;
+      text-align: center;
+    }
+    .project-hero h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 600;
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+      margin: 0 0 10px 0;
+    }
+    .project-hero p {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+
+    /* Hero image card */
+    .hero-media {
+      margin-top: 40px;
+    }
+    .hero-media .frame {
+      background: #111;
+      border-radius: 0; /* screenshot looks square */
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    }
+    .hero-media .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ABOUT + META GRID */
+    .project-about {
+      padding-top: 50px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-copy h2 {
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin: 0 0 18px 0;
+    }
+    .about-copy p {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.9;
+      opacity: 0.85;
+      margin: 0 0 16px 0;
+    }
+
+    .meta {
+      border-top: 1px solid var(--border);
+    }
+    .meta-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-row .k {
+      font-size: 12px;
+      font-weight: 300;
+      opacity: 0.7;
+      min-width: 80px;
+    }
+    .meta-row .v {
+      font-size: 14px;
+      font-weight: 500;
+      text-align: right;
+      opacity: 0.95;
+    }
+
+    /* small yellow circle arrow (matches your work-arrow style) */
+    .meta-cta {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 18px;
+    }
+    .yellow-dot {
+      width: 45px; height: 45px;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: #000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 400;
+    }
+
+    /* IMAGE GRIDS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 54px;
+    }
+    .media-frame {
+      background: #111;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* QUOTE */
+    .quote {
+      text-align: center;
+      padding-top: 70px;
+      padding-bottom: 70px;
+    }
+    .quote blockquote {
+      margin: 0 auto 16px auto;
+      max-width: 900px;
+      font-size: clamp(20px, 2.4vw, 34px);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+    .quote cite {
+      display: block;
+      font-size: 12px;
+      font-weight: 300;
+      opacity: 0.6;
+      font-style: normal;
+    }
+
+    /* BACK HOME BUTTON (small, centered) */
+    .back-home {
+      display: flex;
+      justify-content: center;
+      padding-top: 40px;
+      padding-bottom: 10px;
+    }
+    .back-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid #333;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+    .back-pill:hover { border-color: var(--yellow); }
+
+    /* FINAL CTA (reuse your homepage feel) */
+    .final-cta {
+      text-align: center;
+      padding-top: 90px;
+    }
+    .final-cta h2 {
+      font-size: clamp(36px, 6vw, 64px);
+      letter-spacing: -0.05em;
+      margin-bottom: 24px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-block {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: #000;
+      padding: 26px;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 20px;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .cta:hover { background: var(--yellow); color: #000; }
+
+    .cta-sub {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 300;
+      opacity: 0.95;
+    }
+    .cta-arrow { color: var(--yellow); font-size: 20px; font-weight: 400; position: relative; top: -1px; }
+
+    footer {
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+      .grid-2 { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 56px 18px; }
+
+      .site-header { top: 10px; }
+      .header-inner { height: 56px; padding-left: 18px; padding-right: 18px; }
+      .site-logo { width: 44px; }
+      .resume-link { font-size: 16px; }
+
+      .project-hero { padding-top: 110px; }
+      .project-hero p { font-size: 13px; padding: 0 6px; }
+
+      .hero-media .frame { aspect-ratio: 4 / 3; }
+
+      .about-copy h2 { font-size: 24px; }
+      .meta-row .v { font-size: 13px; }
+
+      .yellow-dot { width: 34px; height: 34px; }
+
+      .cta { padding: 16px 18px; font-size: 16px; }
+      .cta-sub { margin-top: 10px; font-size: 15px; }
+      .cta-arrow { font-size: 16px; top: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" aria-label="Back to homepage">
+        <img src="images/logo.avif" alt="Logan Olausen Design Logo" class="site-logo">
+      </a>
+
+      <!-- Optional: match screenshot top-right -->
+      <a class="resume-link" href="resume.pdf" target="_blank" rel="noopener">
+        <span class="resume-icon" aria-hidden="true">⤓</span>
+        <span>Resume</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- PROJECT HERO -->
+  <section class="project-hero">
+    <div class="container">
+      <h1>Cheeky Goat</h1>
+      <p>Designing an eye-catching and tasteful brand identity for Takaka’s newest food cart business: Cheeky Goat.</p>
+
+      <div class="hero-media">
+        <div class="frame">
+          <!-- Swap this image per project -->
+          <img src="images/projects/cheeky-goat/hero.jpg" alt="Cheeky Goat hero image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PROJECT -->
+  <section class="project-about">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">About Project</span>
+        <span class="section-down" aria-hidden="true">↓</span>
+      </div>
+
+      <div class="about-grid">
+        <!-- Left: copy -->
+        <div class="about-copy">
+          <h2>Calling for an upbeat, fun and memorable identity to emphasise the brand name and draw attention to the Cheeky Goat food cart.</h2>
+          <p>
+            Explain the friendly and approachable vibe, the cheeky expression, the concept behind the name, and the playful nature of the logo.
+            Mention any hand-drawn typeface / illustration style choices.
+          </p>
+          <p>
+            Add your second paragraph here. Keep it short and readable.
+          </p>
+        </div>
+
+        <!-- Right: meta -->
+        <div>
+          <div class="meta">
+            <div class="meta-row">
+              <div class="k">Client</div>
+              <div class="v">Cheeky Goat</div>
+            </div>
+            <div class="meta-row">
+              <div class="k">Role</div>
+              <div class="v">Designer</div>
+            </div>
+            <div class="meta-row">
+              <div class="k">Services</div>
+              <div class="v">Visual Identity</div>
+            </div>
+            <div class="meta-row">
+              <div class="k">Live Site</div>
+              <div class="v">—</div>
+            </div>
+          </div>
+
+          <div class="meta-cta">
+            <span class="yellow-dot" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMAGE GRID 1 -->
+  <section>
+    <div class="container">
+      <div class="grid-2">
+        <div class="media-frame">
+          <img src="images/projects/cheeky-goat/01.jpg" alt="Project image 01">
+        </div>
+        <div class="media-frame">
+          <img src="images/projects/cheeky-goat/02.jpg" alt="Project image 02">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote">
+    <div class="container">
+      <blockquote>
+        “Working with Jessie Mendez has been an absolute game-changer for our business. We couldn't be happier with the results!”
+      </blockquote>
+      <cite>Michael Scott — Fictional Character</cite>
+    </div>
+  </section>
+
+  <!-- FEATURE IMAGE (full width) -->
+  <section>
+    <div class="container">
+      <div class="media-frame" style="aspect-ratio: 16 / 9;">
+        <img src="images/projects/cheeky-goat/03.jpg" alt="Feature image">
+      </div>
+    </div>
+  </section>
+
+  <!-- IMAGE GRID 2 -->
+  <section>
+    <div class="container">
+      <div class="grid-2">
+        <div class="media-frame">
+          <img src="images/projects/cheeky-goat/04.jpg" alt="Project image 04">
+        </div>
+        <div class="media-frame">
+          <img src="images/projects/cheeky-goat/05.jpg" alt="Project image 05">
+        </div>
+      </div>
+
+      <div class="back-home">
+        <a class="back-pill" href="index.html">Take me back home</a>
+      </div>
+
+      <div style="border-top: 1px solid var(--border); margin-top: 30px;"></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Let's collaborate and bring your vision to life!</h2>
+      <div class="cta-block">
+        <a class="cta" href="mailto:hello@loganolausen.com">hello@loganolausen.com</a>
+        <div class="cta-sub">
+          <span>Get in touch</span>
+          <span class="cta-arrow">↑</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2025 Logan Olausen Design
+    </div>
+  </footer>
+</body>
+</html>
 
